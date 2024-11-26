@@ -1,0 +1,133 @@
+.PostList {
+  display: flex;
+  flex-direction: column;
+  header {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #5555552b;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+    }
+
+    select {
+      padding: 0.5rem;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      background-color: white;
+      cursor: pointer;
+
+      &:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+    }
+  }
+  .ListContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-content: center;
+  }
+}
+.PostCardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.PostCard {
+  width: 600px;
+  height: 250px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px) scale(1.002);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.PostCard img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.PostCard h2,
+.PostCard h4,
+.PostCard p {
+  margin: 0;
+  padding: 0.5rem;
+}
+
+.PostCard h2 {
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    color: rgba(0, 0, 255, 0.423);
+  }
+}
+
+.PostCard h4 {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.PostCard p {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.loadingWindow {
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; */
+  //background-color: rgba(0, 0, 0, 0.39);
+  //backdrop-filter: blur(10px);
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
