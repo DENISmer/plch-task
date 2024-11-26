@@ -25,7 +25,7 @@ const PostPage: React.FC = observer(() => {
 
     const Loading: React.FC = () => {
         return <div>
-            <img width={170} src='/cat_dance.gif' alt="Loading" />
+            <img width={170} src='cat_dance.gif' alt="Loading" />
         </div>;
     }
 
@@ -36,7 +36,7 @@ const PostPage: React.FC = observer(() => {
                 (<div className={PD_S.PostContainer}>
                     <div> 
                         <img onLoad={handleImageLoad} width={500} src={api.image} />
-                        {imageLoading && <img width={500} src="/no_image.png" />}
+                        {imageLoading && <img width={500} src="no_image.png" />}
                     </div>
                     <div className={PD_S.ContentContainer}>
                         <h2>{selectedPost.title}</h2>

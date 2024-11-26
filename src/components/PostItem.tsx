@@ -23,7 +23,7 @@ const PostItem: React.FC<Post> = observer(({ body, title, authorName, id }) => {
         <section className={PC_S.PostCardContainer}>
             <div onClick={() => handlePostClick()} className={PC_S.PostCard}>
                 <img onLoad={handleImageLoad} width={400} src={api.image} alt='image' />
-                {imageLoading && <img width={400} src='/no_image.png' alt='image' />}
+                {imageLoading && <img width={400} src='no_image.png' alt='image' />}
                 <h2>{title}</h2>
                 <h4>{authorName}</h4>
                 <p>{body}</p>

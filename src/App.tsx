@@ -6,7 +6,7 @@ import PostPage from './components/PostDetail'
 function App() {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/plch-task">
       <Routes>
         <Route path="/" element={<PostList />} />
         <Route path="/posts/:id" element={<PostPage />} /> 
