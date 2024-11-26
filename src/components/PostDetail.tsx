@@ -3,7 +3,9 @@ import postStore from "../stores/PostStore";
 import { api } from "../api/PostApi";
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import PD_S from '../styles/PostDetail.module.scss'
+import PD_S from '../styles/PostDetail.module.scss';
+import image from '../../public/cat_dance.gif';
+import default_image from '../../public/no_image.png';
 
 const PostPage: React.FC = observer(() => {
     const { selectedPost, loading } = postStore;
@@ -25,7 +27,7 @@ const PostPage: React.FC = observer(() => {
 
     const Loading: React.FC = () => {
         return <div>
-            <img width={170} src='cat_dance.gif' alt="Loading" />
+            <img width={170} src={image} alt="Loading" />
         </div>;
     }
 
@@ -36,7 +38,7 @@ const PostPage: React.FC = observer(() => {
                 (<div className={PD_S.PostContainer}>
                     <div> 
                         <img onLoad={handleImageLoad} width={500} src={api.image} />
-                        {imageLoading && <img width={500} src="no_image.png" />}
+                        {imageLoading && <img width={500} src={default_image} />}
                     </div>
                     <div className={PD_S.ContentContainer}>
                         <h2>{selectedPost.title}</h2>

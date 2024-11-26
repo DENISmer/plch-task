@@ -4,7 +4,7 @@ import postStore from "../stores/PostStore";
 import { useEffect } from "react";
 import PL_S from '../styles/PostList.module.scss';
 import PaginationBar from "./tools/Pagination";
-
+import image from '../../public/cat_dance.gif'
 const PostList: React.FC = observer(() => {
     const { posts, loading, currentPage, postsPerPage } = postStore;
 
@@ -19,7 +19,7 @@ const PostList: React.FC = observer(() => {
 
     const Loading: React.FC = () => {
         return <div className={PL_S.loadingWindow}>
-            <img width={170} src='cat_dance.gif' alt="Loading" />
+            <img width={170} src={image} alt="Loading" />
         </div>;
     }
 
