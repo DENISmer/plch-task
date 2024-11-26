@@ -19,7 +19,7 @@ const PostList: React.FC = observer(() => {
 
     const Loading: React.FC = () => {
         return <div className={PL_S.loadingWindow}>
-            <img width={170} src='/cat_dance.gif' alt="Loading" />
+            <img width={170} src='cat_dance.gif' alt="Loading" />
         </div>;
     }
 
