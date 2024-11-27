@@ -1,35 +1,47 @@
 import { observer } from "mobx-react-lite"
 import postStore from "../../stores/PostStore"
-import PL_S from '../../styles/PostList.module.scss'
+import styles from '../../styles/PostList.module.scss'
 
 const PaginationBar = observer(() => {
-    const {postsPerPage, currentPage, posts} = postStore;
+    const {currentPage, posts, totalPagesCount ,currentArrayOfPages} = postStore;
 
-    const handleChangePage = (forward: boolean) => {
-        if (forward) {
-            postStore.setCurrentPage(currentPage + 1)
+    const handleChangePage = (forward: boolean | number) => {
+        if (typeof forward == 'number') {
+            postStore.setCurrentPage(forward)
         } else {
-            postStore.setCurrentPage(currentPage - 1)
+            if (forward) {
+                postStore.setCurrentPage(currentPage + 1)
+            } else {
+                postStore.setCurrentPage(currentPage - 1)
+            }
         }
     }
 
-    const ItemsPerPageSelect: React.FC = () => {
+    const GenerateButtons = () => {
+        console.warn("BBB: ",currentArrayOfPages)
         return (
-            <div>
-                <select value={postsPerPage} onChange={(e) => postStore.setPostsPerPage(Number(e.target.value))}>
-                    <option value={5}>5</option>
-                    <option value={10}>10</option>
-                    <option value={20}>20</option>
-                </select>
-            </div>
-        )
-    }
+          <div style={{display: 'flex', columnGap: '5px'}}>
+            {currentArrayOfPages && currentArrayOfPages.map((pageNumber) => (
+              <button
+                key={pageNumber}
+                onClick={() => handleChangePage(pageNumber)}
+                style={pageNumber === currentPage ? { border: '2px solid black', backgroundColor: '#002144' } : {}}
+              >
+                {pageNumber}
+              </button>
+            ))}
+          </div>
+        );
+      };
+      
 
     return (
-        <div className={PL_S.pagination}>
-            <button disabled={currentPage === 1} onClick={() => handleChangePage(false)}>←</button>
-            {currentPage}{" "}<ItemsPerPageSelect />
-            <button disabled={posts.length === 0} onClick={() => handleChangePage(true)}>→</button>
+        <div className={styles.pagination}>
+            {/* <div>{totalPagesCount}</div> */}
+            <button disabled={currentPage === 1 || posts.length === 0} onClick={() => handleChangePage(false)}>←</button>
+            <GenerateButtons />
+            <button disabled={posts.length === 0 || currentPage === totalPagesCount} onClick={() => handleChangePage(true)}>→</button>
+            {/* <ItemsPerPageSelect /> */}
         </div>
     )
 })

@@ -10,6 +10,8 @@ class PostStore {
   currentPage: number = 1;
   loading: boolean = false;
   selectedPost: Post | null = null;
+  totalPagesCount: number = 0;
+  currentArrayOfPages: number[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -39,7 +41,28 @@ class PostStore {
             signal,
           }
         )
-        .then((res: AxiosResponse<Post[]>) => res.data);
+        .then((res: AxiosResponse<Post[]>) => {
+          const totalPages = Math.ceil(
+            Number(res.headers["x-total-count"]) / this.postsPerPage
+          );
+
+          this.totalPagesCount = totalPages
+
+          const pageButtons = [];
+          const pagesPerGroup = 5;
+          const currentGroup = Math.floor((this.currentPage - 1) / pagesPerGroup);
+          const startPage = currentGroup * pagesPerGroup + 1;
+          const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
+
+          for (let i = startPage; i <= endPage; i++) {
+            pageButtons.push(i);
+          }
+
+          console.warn(pageButtons)
+          this.currentArrayOfPages = pageButtons
+
+          return res.data;
+        });
 
       console.warn("Simple Posts:", simplePosts);
 
@@ -78,8 +101,8 @@ class PostStore {
     if (this.selectedPost && this.selectedPost.id === postId) {
       return null;
     } else {
-      this.selectedPost = null
-      this.loading = true
+      this.selectedPost = null;
+      this.loading = true;
       try {
         // get Post
         const postResponse = await axios.get<Post>(`${api.post}${postId}`);
@@ -100,7 +123,7 @@ class PostStore {
         console.warn("POST: ", postWithAuthor);
 
         this.selectedPost = postWithAuthor; // add to store
-        this.loading = false
+        this.loading = false;
       } catch (error) {
         console.error("Error fetching post or user: ", error);
       }
