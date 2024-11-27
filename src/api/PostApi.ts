@@ -1,6 +1,6 @@
 export const api = {
-  posts: `https://jsonplaceholder.typicode.com/posts?`,
-  user: `https://jsonplaceholder.typicode.com/users/`,
-  post: `https://jsonplaceholder.typicode.com/posts/`,
-  image: `https://picsum.photos/1500/1500.jpg`,
+  posts: import.meta.env.VITE_API_POSTS,
+  user: import.meta.env.VITE_API_USER,
+  post: import.meta.env.VITE_API_POST,
+  image: import.meta.env.VITE_API_IMAGE,
 };

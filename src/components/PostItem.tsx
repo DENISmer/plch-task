@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { Post } from "../types/types";
-import PC_S from '../styles/PostList.module.scss'
+import card_style from '../styles/PostList.module.scss'
 import { useNavigate } from "react-router";
 import { api } from "../api/PostApi";
 import postStore from "../stores/PostStore";
@@ -21,8 +21,8 @@ const PostItem: React.FC<Post> = observer(({ body, title, authorName, id }) => {
     }
 
     return (
-        <section className={PC_S.PostCardContainer}>
-            <div onClick={() => handlePostClick()} className={PC_S.PostCard}>
+        <section className={card_style.PostCardContainer}>
+            <div onClick={() => handlePostClick()} className={card_style.PostCard}>
                 <img onLoad={handleImageLoad} width={400} src={api.image} alt='image' />
                 {imageLoading && <img width={400} src={defaultImage} alt='image' />}
                 <h2>{title}</h2>
