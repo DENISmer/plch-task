@@ -11,3 +11,10 @@ export interface User {
     name: string,
     postId: number,
 }
+
+export interface ImageWithFallback {
+    src: string,
+    fallback: string,
+    alt: "image" | "no picture",
+    width: number
+}

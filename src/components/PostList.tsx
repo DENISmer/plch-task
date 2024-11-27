@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import style from '../styles/PostList.module.scss';
 import PaginationBar from "./tools/Pagination";
 import { Loading } from "./tools/Loading";
+import Header from "./ui/Header";
 
 const PostList: React.FC = observer(() => {
     const { posts, loading, currentPage, postsPerPage } = postStore;
@@ -19,20 +20,37 @@ const PostList: React.FC = observer(() => {
         }
     }, [currentPage, postsPerPage]);
 
+    if (loading) {
+        return (
+        <section className={style.PostList}>
+            <Header />
+            <PaginationBar />
+            <Loading />
+        </section>);
+    }
+
+    if (!loading && posts.length === 0) {
+        return (
+            <section className={style.PostList}>
+                <Header />
+                <PaginationBar />
+                <p>No posts available</p>
+            </section>
+        );
+    }
+
     return (
         <section className={style.PostList}>
-            <header>
-                <h1>POST LIST</h1>
-            </header>
+            <Header />
             <PaginationBar />
             <div className={style.ListContainer}>
-                {!loading ? posts.map((item) => (
+                {posts.map((item) => (
                     <PostItem key={item.id} {...item} />
-                )) : <Loading />}
+                ))}
             </div>
-            {!loading && posts.length > 0 && <PaginationBar />}
+            <PaginationBar />
         </section>
-    )
+    );
 })
 
 export default PostList;
